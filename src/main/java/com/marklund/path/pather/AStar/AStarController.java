@@ -16,12 +16,12 @@ public class AStarController {
     @GetMapping
     public Map<Integer, List<Integer[]>> getAStarPath(
             @RequestParam(value = "grid") Integer[][] grid,
-            @RequestParam(value = "startx") Integer startX,
             @RequestParam(value = "starty") Integer startY,
-            @RequestParam(value = "endx") Integer endX,
-            @RequestParam(value = "endy") Integer endY) {
+            @RequestParam(value = "startx") Integer startX,
+            @RequestParam(value = "endy") Integer endY,
+            @RequestParam(value = "endx") Integer endX) {
 
-        return aStarService.findClosestPath(grid, startX, startY, endX, endY);
+        return aStarService.findClosestPath(grid, startY, startX, endY, endX);
 
     }
 }
