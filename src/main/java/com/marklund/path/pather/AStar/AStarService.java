@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Service
@@ -18,13 +19,14 @@ public class AStarService <T extends Cell>{
     private MinHeap<T> priorityQueue;
     private List<Integer[]> cellsVisited;
 
-    public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startX, int startY, int endX, int endY) {
+
+    public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
         vertexMatrix = getVertexMatrix(matrix);
-        priorityQueue = new MinHeap(vertexMatrix.length * vertexMatrix[0].length);
+        priorityQueue = new MinHeap<T>(vertexMatrix.length * vertexMatrix[0].length);
         cellsVisited = new ArrayList<>();
 
-        T start = vertexMatrix[startX][startY];
-        goal = vertexMatrix[endX][endY];
+        T start = vertexMatrix[startY][startX];
+        goal = vertexMatrix[endY][endX];
 
         start.setDistanceFromStart(0);
         start.setHeuristicDistance(getDistance.apply(start, goal));
@@ -69,12 +71,17 @@ public class AStarService <T extends Cell>{
                     neighbour.setParent(current);
                     if(neighbour.getX() == goal.getX() && neighbour.getY() == goal.getY())
                         return;
-                    priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
-                    cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
+
+                    addToQueueAndVisitedList.accept(neighbour);
                 }
             }
         }
     }
+
+    private final Consumer<T> addToQueueAndVisitedList = neighbour -> {
+        priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
+        cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
+    };
 
     private List<Integer[]> getShortestPathByThePathsVisited() {
         List<Integer[]> shortestPath = new java.util.ArrayList<>();
