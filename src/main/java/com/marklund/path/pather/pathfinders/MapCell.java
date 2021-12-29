@@ -1,4 +1,4 @@
-package com.marklund.path.pather.AStar;
+package com.marklund.path.pather.pathfinders;
 
 public class MapCell extends Cell{
     public MapCell(int x, int y) {

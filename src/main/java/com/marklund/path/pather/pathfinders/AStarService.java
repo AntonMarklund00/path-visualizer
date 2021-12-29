@@ -1,4 +1,4 @@
-package com.marklund.path.pather.AStar;
+package com.marklund.path.pather.pathfinders;
 
 import com.marklund.path.pather.utils.MinHeap;
 import org.springframework.stereotype.Service;

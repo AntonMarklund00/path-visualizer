@@ -1,4 +1,4 @@
-package com.marklund.path.pather.AStar;
+package com.marklund.path.pather.pathfinders;
 
 public abstract class Cell {
 

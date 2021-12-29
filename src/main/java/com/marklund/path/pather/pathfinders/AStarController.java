@@ -1,4 +1,4 @@
-package com.marklund.path.pather.AStar;
+package com.marklund.path.pather.pathfinders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

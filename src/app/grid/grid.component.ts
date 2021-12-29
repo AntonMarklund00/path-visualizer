@@ -100,7 +100,7 @@ export class GridComponent implements OnInit {
     let visited = this.solution[0];
 
     for (let i = 0; i < visited.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 25));
+      await new Promise(resolve => setTimeout(resolve, 15));
       this.grid[visited[i][0]][visited[i][1]] = 4;
     }
   }
