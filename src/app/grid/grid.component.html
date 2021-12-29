@@ -1,0 +1,21 @@
+<div class="playBoard">
+    <tr *ngFor="let row of grid; let i = index">
+        <td *ngFor="let col of row; let j = index">
+            <div class="cell" (mousedown)="onMouseDown(i,j)" (mouseover)="onMouseOver(i,j)" (mouseup)="onMouseUp()"
+                    [ngClass]="{'active' : col==1, 'start': col==2, 'goal': col==3, 'path': col==5, 'visited': col==4}">
+            </div>
+        </td>
+    </tr>
+    <div class="buttonGroup">
+        <button class="button" [disabled]="buttonDisabled" (click)="solveGrid()">Solve</button>
+        <button class="button clear" [disabled]="buttonDisabled" (click)="cleanGrid()">Clear Board</button>
+        <button class="button clear" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Path</button>
+    </div>
+    <div class="buttonGroup">
+        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(1)">Preset 1</button>
+        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(2)">Preset 2</button>
+        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(3)">Preset 3</button>
+    </div>
+</div>
+
+
