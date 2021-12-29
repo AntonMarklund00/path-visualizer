@@ -89,3 +89,4 @@ angular.json-e
 mvnw
 .gitignore-e
 .browserslistrc
+.mvn
