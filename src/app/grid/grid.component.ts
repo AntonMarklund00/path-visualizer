@@ -87,10 +87,10 @@ export class GridComponent implements OnInit {
     const data = await this.http.get('/api/astar',
         {params: {
           'grid': this.grid,
-            'startx': this.startPositionY,
-            'starty': this.startPositionX,
-            'endx': this.endPositionY,
-            'endy': this.endPositionX}})
+            'starty': this.startPositionY,
+            'startx': this.startPositionX,
+            'endy': this.endPositionY,
+            'endx': this.endPositionX}})
         .toPromise()
 
     this.solution = data;
