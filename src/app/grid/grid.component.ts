@@ -74,9 +74,9 @@ export class GridComponent implements OnInit {
     }
   }
 
-  async solveGrid(){
+  async solveGridWithAStar(){
     this.buttonDisabled = true;
-    await this.getSolutionFromApi();
+    await this.getAStarSolutionFromApi();
     await this.drawVisitedSolution();
     this.drawSolution();
     this.buttonDisabled = false;
@@ -90,7 +90,7 @@ export class GridComponent implements OnInit {
     this.buttonDisabled = false;
   }
 
-  async getSolutionFromApi(){
+  async getAStarSolutionFromApi(){
     // @ts-ignore
     const data = await this.http.get('/api/astar',
         {params: {
