@@ -82,9 +82,31 @@ export class GridComponent implements OnInit {
     this.buttonDisabled = false;
   }
 
+  async solveGridWithDjikstras(){
+    this.buttonDisabled = true;
+    await this.getDjikstrasSolutionFromApi()
+    await this.drawVisitedSolution();
+    this.drawSolution();
+    this.buttonDisabled = false;
+  }
+
   async getSolutionFromApi(){
     // @ts-ignore
     const data = await this.http.get('/api/astar',
+        {params: {
+          'grid': this.grid,
+            'starty': this.startPositionY,
+            'startx': this.startPositionX,
+            'endy': this.endPositionY,
+            'endx': this.endPositionX}})
+        .toPromise()
+
+    this.solution = data;
+  }
+
+  async getDjikstrasSolutionFromApi(){
+    // @ts-ignore
+    const data = await this.http.get('/api/djikstra',
         {params: {
           'grid': this.grid,
             'starty': this.startPositionY,

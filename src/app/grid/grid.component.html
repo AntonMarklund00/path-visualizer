@@ -7,14 +7,14 @@
         </td>
     </tr>
     <div class="buttonGroup">
-        <button class="button" [disabled]="buttonDisabled" (click)="solveGrid()">Solve</button>
+        <button class="button" [disabled]="buttonDisabled" (click)="solveGrid()">Solve With A*</button>
         <button class="button clear" [disabled]="buttonDisabled" (click)="cleanGrid()">Clear Board</button>
         <button class="button clear" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Path</button>
     </div>
     <div class="buttonGroup">
+        <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithDjikstras()">Solve With Djikstra</button>
         <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(1)">Preset 1</button>
         <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(2)">Preset 2</button>
-        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(3)">Preset 3</button>
     </div>
 </div>
 
