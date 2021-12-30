@@ -13,7 +13,7 @@
 * { box-sizing: border-box; }
 table { margin: 10px; }
 td {
-    border: 1px solid lightgrey;
+    border: 1px solid lightgray;
     height: 40px;
     width: 40px;
 }
@@ -23,7 +23,7 @@ td {
 }
 
 .start{
-    background-color: #30C13A;
+    background-color: #197fe6;
 }
 
 .goal{
@@ -31,11 +31,11 @@ td {
 }
 
 .path{
-    background-color: #FFCD00;
+    background-color: #8ce65c;
 }
 
 .visited{
-    background-color: #7C95A9;
+    background-color: #89ab8c;
 }
 
 .cell {
