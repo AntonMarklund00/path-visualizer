@@ -162,8 +162,12 @@ export class GridComponent implements OnInit {
     }
   }
 
-  setPreset(type: number){
+  setStartAndEnd(event){
+    this.startPositionY = event[0][0]
+    this.startPositionX = event[0][1]
 
+    this.endPositionY = event[1][0]
+    this.endPositionX = event[1][1]
   }
 
 }

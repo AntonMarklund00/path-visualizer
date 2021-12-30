@@ -9,12 +9,11 @@
     <div class="buttonGroup">
         <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithAStar()">Solve With A*</button>
         <button class="button clear" [disabled]="buttonDisabled" (click)="cleanGrid()">Clear Board</button>
-        <button class="button clear" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Walls</button>
+        <button class="button clear" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Path</button>
+        <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithDjikstras()">Solve With Djikstra</button>
     </div>
     <div class="buttonGroup">
-        <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithDjikstras()">Solve With Djikstra</button>
-        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(1)">Preset 1</button>
-        <button class="button preset" [disabled]="buttonDisabled" (click)="setPreset(2)">Preset 2</button>
+        <app-presets (presetEmit)="grid = $event" (startAndEnd)="setStartAndEnd($event)"></app-presets>
     </div>
 </div>
 
