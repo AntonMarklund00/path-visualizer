@@ -1,6 +1,6 @@
 package com.marklund.path.pather.utils;
 
-import com.marklund.path.pather.pathfinders.Cell;
+import com.marklund.path.pather.pathfinders.due.Cell;
 
 import java.lang.reflect.Array;
 

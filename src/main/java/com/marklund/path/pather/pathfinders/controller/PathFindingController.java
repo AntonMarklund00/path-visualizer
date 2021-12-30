@@ -1,5 +1,7 @@
-package com.marklund.path.pather.pathfinders;
+package com.marklund.path.pather.pathfinders.controller;
 
+import com.marklund.path.pather.pathfinders.service.AStarService;
+import com.marklund.path.pather.pathfinders.service.DjikstraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class AStarController {
+public class PathFindingController {
 
     @Autowired
     private AStarService aStarService;

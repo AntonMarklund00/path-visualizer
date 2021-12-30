@@ -1,5 +1,7 @@
-package com.marklund.path.pather.pathfinders;
+package com.marklund.path.pather.pathfinders.service;
 
+import com.marklund.path.pather.pathfinders.due.Cell;
+import com.marklund.path.pather.pathfinders.due.MapCell;
 import com.marklund.path.pather.utils.MinHeap;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class DjikstraService <T extends Cell>{
     private MinHeap<T> priorityQueue;
     private List<Integer[]> cellsVisited;
 
-    protected Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
+    public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
         vertexMatrix = getVertexMatrix(matrix);
         priorityQueue = new MinHeap<T>(vertexMatrix.length * vertexMatrix[0].length);
         cellsVisited = new ArrayList<>();

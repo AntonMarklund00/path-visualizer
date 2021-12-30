@@ -1,6 +1,8 @@
-package com.marklund.path.pather.pathfinders;
+package com.marklund.path.pather.pathfinders.due;
 
-public class MapCell extends Cell{
+import com.marklund.path.pather.pathfinders.due.Cell;
+
+public class MapCell extends Cell {
     public MapCell(int x, int y) {
         super(x, y);
         distanceFromStart = 0;

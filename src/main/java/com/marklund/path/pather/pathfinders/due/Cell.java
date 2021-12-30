@@ -1,4 +1,4 @@
-package com.marklund.path.pather.pathfinders;
+package com.marklund.path.pather.pathfinders.due;
 
 public abstract class Cell {
 
