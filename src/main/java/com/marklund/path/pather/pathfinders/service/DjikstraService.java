@@ -65,14 +65,13 @@ public class DjikstraService <T extends Cell>{
                 int costFromStart = current.getDistanceFromStart() + 1;
                 double heuristicDistance = getDistance(neighbour, goal);
                 if( neighbour != null && !neighbour.isWall() && (!neighbour.isVisited() || costFromStart < neighbour.getDistanceFromStart())) {
-                    neighbour.setVisited(true);
                     neighbour.setDistanceFromStart(costFromStart);
                     neighbour.setHeuristicDistance(heuristicDistance);
                     neighbour.setParent(current);
                     if(neighbour.getX() == goal.getX() && neighbour.getY() == goal.getY())
                         return;
-
                     addToQueueAndVisitedList.accept(neighbour);
+                    neighbour.setVisited(true);
                 }
             }
         }
@@ -80,7 +79,8 @@ public class DjikstraService <T extends Cell>{
 
     private final Consumer<T> addToQueueAndVisitedList = neighbour -> {
         priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
-        cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
+        if (!neighbour.isVisited())
+            cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
     };
 
     private List<Integer[]> getShortestPathByThePathsVisited() {
