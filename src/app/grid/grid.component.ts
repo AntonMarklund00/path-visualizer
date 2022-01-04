@@ -127,9 +127,10 @@ export class GridComponent implements OnInit {
     }
   }
 
-  drawSolution(){
+  async drawSolution(){
     let solution = this.solution[1];
     for (let i = 0; i < solution.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 15));
       this.grid[solution[i][0]][solution[i][1]]=5;
     }
   }
