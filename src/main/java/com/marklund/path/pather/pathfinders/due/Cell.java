@@ -8,9 +8,11 @@ public abstract class Cell {
     protected double heuristicDistance;
     protected Cell parent;
     protected boolean isVisited;
+    protected String name;
     protected boolean isWall;
 
     public Cell(int x, int y) {
+        this.name = null;
         this.x = x;
         this.y = y;
     }
@@ -65,5 +67,13 @@ public abstract class Cell {
 
     public double getCombinedDistance() {
         return getHeuristicDistance() + getDistanceFromStart();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

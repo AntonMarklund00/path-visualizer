@@ -92,7 +92,7 @@ export class GridComponent implements OnInit {
 
   async getAStarSolutionFromApi(){
     // @ts-ignore
-    const data = await this.http.get('/api/astar',
+    const data = await this.http.get('/api/astar/bidirectional',
         {params: {
           'grid': this.grid,
             'starty': this.startPositionY,
@@ -100,6 +100,7 @@ export class GridComponent implements OnInit {
             'endy': this.endPositionY,
             'endx': this.endPositionX}})
         .toPromise()
+    console.log(data)
 
     this.solution = data;
   }

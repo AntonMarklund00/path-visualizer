@@ -15,17 +15,18 @@ import java.util.function.Supplier;
 @Service
 public class DjikstraService <T extends Cell>{
 
-    private T[][] vertexMatrix;
-    private T goal;
-    private MinHeap<T> priorityQueue;
-    private List<Integer[]> cellsVisited;
+    protected T[][] vertexMatrix;
+    protected T goal;
+    protected T start;
+    protected MinHeap<T> priorityQueue;
+    protected List<Integer[]> cellsVisited;
 
     public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
         vertexMatrix = getVertexMatrix(matrix);
         priorityQueue = new MinHeap<T>(vertexMatrix.length * vertexMatrix[0].length);
         cellsVisited = new ArrayList<>();
 
-        T start = vertexMatrix[startY][startX];
+        start = vertexMatrix[startY][startX];
         goal = vertexMatrix[endY][endX];
 
         start.setDistanceFromStart(0);
@@ -33,13 +34,17 @@ public class DjikstraService <T extends Cell>{
 
         priorityQueue.insert(start.getCombinedDistance(), start);
 
-        findRouteFromStartToFinnish();
+        start();
 
         Map<Integer, List<Integer[]>> map = new HashMap<>();
         map.put(0, cellsVisited);
         map.put(1, getShortestPathByThePathsVisited());
 
         return map;
+    }
+
+    protected void start(){
+        findRouteFromStartToFinnish();
     }
 
     private T[][] getVertexMatrix(Integer[][] matrix) {
@@ -68,22 +73,27 @@ public class DjikstraService <T extends Cell>{
                     neighbour.setDistanceFromStart(costFromStart);
                     neighbour.setHeuristicDistance(heuristicDistance);
                     neighbour.setParent(current);
-                    if(neighbour.getX() == goal.getX() && neighbour.getY() == goal.getY())
+                    if(isEnd(neighbour)){
                         return;
-                    addToQueueAndVisitedList.accept(neighbour);
+                    }
+                    addToQueueAndVisitedList(neighbour);
                     neighbour.setVisited(true);
                 }
             }
         }
     }
 
-    private final Consumer<T> addToQueueAndVisitedList = neighbour -> {
+    protected boolean isEnd(T current) {
+        return current.getX() == goal.getX() && current.getY() == goal.getY();
+    }
+
+    protected final void addToQueueAndVisitedList(T neighbour) {
         priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
         if (!neighbour.isVisited())
             cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
     };
 
-    private List<Integer[]> getShortestPathByThePathsVisited() {
+    protected List<Integer[]> getShortestPathByThePathsVisited() {
         List<Integer[]> shortestPath = new java.util.ArrayList<>();
         if (goal.getParent() == null) {
             return shortestPath;
