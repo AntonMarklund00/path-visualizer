@@ -60,7 +60,7 @@ public class DjikstraService <T extends Cell>{
         while (!priorityQueue.isEmpty()) {
             T current = priorityQueue.remove();
             current.setVisited(true);
-            List<T> neighbours = getAllSixNeighbours(current);
+            List<T> neighbours = getAllFourNeighbours(current);
             for (T neighbour : neighbours) {
                 int costFromStart = current.getDistanceFromStart() + 1;
                 double heuristicDistance = getDistance(neighbour, goal);
@@ -102,7 +102,7 @@ public class DjikstraService <T extends Cell>{
     }
 
 
-    public List<T> getAllSixNeighbours(T vertex) {
+    public List<T> getAllFourNeighbours(T vertex) {
         List<T> neighbours = new java.util.ArrayList<>();
         int x = vertex.getX();
         int y = vertex.getY();
