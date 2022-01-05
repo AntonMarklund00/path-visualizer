@@ -33,7 +33,7 @@ public class DjikstraServiceTest {
         int amountOfStepsTaken = givenResultFromService.get(0).size();
 
         // then
-        assertThat(amountOfStepsTaken).isEqualTo(24);
+        assertThat(amountOfStepsTaken).isEqualTo(22);
     }
 
     @Test

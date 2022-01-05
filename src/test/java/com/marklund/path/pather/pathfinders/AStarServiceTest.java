@@ -32,7 +32,7 @@ public class AStarServiceTest {
         int amountOfStepsTaken = givenResultFromService.get(0).size();
 
         // then
-        assertThat(amountOfStepsTaken).isEqualTo(18);
+        assertThat(amountOfStepsTaken).isEqualTo(17);
     }
 
     @Test
