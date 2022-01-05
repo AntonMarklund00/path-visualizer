@@ -60,7 +60,7 @@ public class DjikstraService <T extends Cell>{
         while (!priorityQueue.isEmpty()) {
             T current = priorityQueue.remove();
             current.setVisited(true);
-            List<T> neighbours = getNeighbours(current);
+            List<T> neighbours = getAllSixNeighbours(current);
             for (T neighbour : neighbours) {
                 int costFromStart = current.getDistanceFromStart() + 1;
                 double heuristicDistance = getDistance(neighbour, goal);
@@ -102,21 +102,39 @@ public class DjikstraService <T extends Cell>{
     }
 
 
-    public List<T> getNeighbours(T vertex) {
+    public List<T> getAllSixNeighbours(T vertex) {
         List<T> neighbours = new java.util.ArrayList<>();
-        int startPosX = (vertex.getX() - 1 < 0) ? vertex.getX() : vertex.getX()-1;
-        int startPosY = (vertex.getY() - 1 < 0) ? vertex.getY() : vertex.getY()-1;
-        int endPosX =   (vertex.getX() + 1 > getListXSize.get()) ? vertex.getX() : vertex.getX()+1;
-        int endPosY =   (vertex.getY() + 1 > getListXSize.get()) ? vertex.getY() : vertex.getY()+1;
+        int x = vertex.getX();
+        int y = vertex.getY();
+        if(x + 1 < vertexMatrix[0].length){
+            neighbours.add(vertexMatrix[x + 1][y]);
+        }
+        if(x - 1 >= 0){
+            neighbours.add(vertexMatrix[x - 1][y]);
+        }
+        if(y + 1 < vertexMatrix[0].length){
+            neighbours.add(vertexMatrix[x][y + 1]);
+        }
+        if(y - 1 >= 0){
+            neighbours.add(vertexMatrix[x][y - 1]);
+        }
+        return neighbours;
+    }
 
-        for (int rowNum=startPosY; rowNum<=endPosY; rowNum++) {
-            for (int colNum=startPosX; colNum<=endPosX; colNum++) {
-                if(rowNum == vertex.getY() && colNum == vertex.getX()) continue;
+    public List<T> getAllEightNeighbours(T vertex) {
+        List<T> neighbours = new java.util.ArrayList<>();
+        int startPosX = (vertex.getX() - 1 < 0) ? vertex.getX() : vertex.getX() - 1;
+        int startPosY = (vertex.getY() - 1 < 0) ? vertex.getY() : vertex.getY() - 1;
+        int endPosX = (vertex.getX() + 1 > getListXSize.get()) ? vertex.getX() : vertex.getX() + 1;
+        int endPosY = (vertex.getY() + 1 > getListXSize.get()) ? vertex.getY() : vertex.getY() + 1;
+
+        for (int rowNum = startPosY; rowNum <= endPosY; rowNum++) {
+            for (int colNum = startPosX; colNum <= endPosX; colNum++) {
+                if (rowNum == vertex.getY() && colNum == vertex.getX()) continue;
                 neighbours.add(vertexMatrix[colNum][rowNum]);
             }
         }
         return neighbours;
     }
-
-    private Supplier<Integer> getListXSize = () -> vertexMatrix[0].length;
+    private final Supplier<Integer> getListXSize = () -> vertexMatrix[0].length;
 }
