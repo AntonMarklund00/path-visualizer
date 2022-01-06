@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Service
@@ -87,11 +86,11 @@ public class DjikstraService <T extends Cell>{
         return current.getX() == goal.getX() && current.getY() == goal.getY();
     }
 
-    protected final void addToQueueAndVisitedList(T neighbour) {
+    protected void addToQueueAndVisitedList(T neighbour) {
         priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
         if (!neighbour.isVisited())
             cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
-    };
+    }
 
     protected List<Integer[]> getShortestPathByThePathsVisited() {
         List<Integer[]> shortestPath = new java.util.ArrayList<>();
