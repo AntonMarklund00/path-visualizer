@@ -2,7 +2,6 @@ package com.marklund.path.pather.pathfinders.controller;
 
 import com.marklund.path.pather.pathfinders.due.Cell;
 import com.marklund.path.pather.pathfinders.service.AStarService;
-import com.marklund.path.pather.pathfinders.service.BiDirectionAStar;
 import com.marklund.path.pather.pathfinders.service.DjikstraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +18,6 @@ public class PathFindingController {
 
     @Autowired
     private DjikstraService<Cell> djikstraService;
-
-    @Autowired
-    private BiDirectionAStar<Cell> biDirectionAStar;
 
     @GetMapping("/astar")
     public Map<Integer, List<Integer[]>> getAStarPath(
@@ -43,16 +39,5 @@ public class PathFindingController {
             @RequestParam(value = "endx") Integer endX) {
 
         return djikstraService.findClosestPath(grid, startY, startX, endY, endX);
-    }
-
-    @GetMapping("/astar/bidirectional")
-    public Map<Integer, List<Integer[]>> getBidirectionalPath(
-            @RequestParam(value = "grid") Integer[][] grid,
-            @RequestParam(value = "starty") Integer startY,
-            @RequestParam(value = "startx") Integer startX,
-            @RequestParam(value = "endy") Integer endY,
-            @RequestParam(value = "endx") Integer endX) {
-
-        return biDirectionAStar.findClosestPath(grid, startY, startX, endY, endX);
     }
 }
