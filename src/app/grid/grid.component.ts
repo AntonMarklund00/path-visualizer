@@ -20,6 +20,8 @@ export class GridComponent implements OnInit {
   endPositionX: number = 26;
   mouseDown: boolean = false
   isWallMove: boolean = true;
+  moveStart: boolean = false;
+  moveEnd: boolean = false;
 
   constructor(private http: HttpClient) {
   }
@@ -67,8 +69,30 @@ export class GridComponent implements OnInit {
       this.mouseDown = true
     }
 
+    if (this.grid[y][x] == 2) {
+      this.grid[y][x] = 0;
+      this.moveStart = true;
+    }
+
+    if (this.grid[y][x] == 3) {
+      this.grid[y][x] = 0;
+      this.moveEnd = true;
+    }
+
     if (this.isWallMove) {
-      this.grid[y][x] = 1;
+      if (this.moveStart){
+        this.grid[y][x] = 2;
+        this.moveStart = false;
+        this.startPositionX = x;
+        this.startPositionY = y;
+      }else if(this.moveEnd){
+        this.grid[y][x] = 3;
+        this.moveEnd = false;
+        this.endPositionX = x;
+        this.endPositionY = y;
+      } else{
+        this.grid[y][x] = 1;
+      }
     } else {
       this.grid[y][x] = 0;
     }
@@ -92,7 +116,7 @@ export class GridComponent implements OnInit {
 
   async getAStarSolutionFromApi(){
     // @ts-ignore
-    const data = await this.http.get('/api/astar/bidirectional',
+    const data = await this.http.get('/api/astar',
         {params: {
           'grid': this.grid,
             'starty': this.startPositionY,
