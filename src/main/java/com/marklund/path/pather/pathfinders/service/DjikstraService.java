@@ -14,11 +14,11 @@ import java.util.function.Supplier;
 @Service
 public class DjikstraService <T extends Cell>{
 
-    protected T[][] vertexMatrix;
-    protected T goal;
-    protected T start;
-    protected MinHeap<T> priorityQueue;
-    protected List<Integer[]> cellsVisited;
+    private T[][] vertexMatrix;
+    private T goal;
+    private T start;
+    private MinHeap<T> priorityQueue;
+    private List<Integer[]> cellsVisited;
 
     public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
         vertexMatrix = getVertexMatrix(matrix);
@@ -60,7 +60,7 @@ public class DjikstraService <T extends Cell>{
         return vertexMatrix;
     }
 
-    protected void findRouteFromStartToFinnish() {
+    private void findRouteFromStartToFinnish() {
         while (!priorityQueue.isEmpty()) {
             T current = priorityQueue.remove();
             current.setVisited(true);
@@ -82,17 +82,17 @@ public class DjikstraService <T extends Cell>{
         }
     }
 
-    protected boolean isEnd(T current) {
+    private boolean isEnd(T current) {
         return current.getX() == goal.getX() && current.getY() == goal.getY();
     }
 
-    protected void addToQueueAndVisitedList(T neighbour) {
+    private void addToQueueAndVisitedList(T neighbour) {
         priorityQueue.insert(neighbour.getCombinedDistance(), neighbour);
         if (!neighbour.isVisited())
             cellsVisited.add(new Integer[]{neighbour.getX(), neighbour.getY()});
     }
 
-    protected List<Integer[]> getShortestPathByThePathsVisited() {
+    private List<Integer[]> getShortestPathByThePathsVisited() {
         List<Integer[]> shortestPath = new java.util.ArrayList<>();
         if (goal.getParent() == null) {
             return shortestPath;
@@ -111,7 +111,7 @@ public class DjikstraService <T extends Cell>{
     }
 
 
-    public List<T> getAllFourNeighbours(T vertex) {
+    private List<T> getAllFourNeighbours(T vertex) {
         List<T> neighbours = new java.util.ArrayList<>();
         int x = vertex.getX();
         int y = vertex.getY();
@@ -130,7 +130,7 @@ public class DjikstraService <T extends Cell>{
         return neighbours;
     }
 
-    public List<T> getAllEightNeighbours(T vertex) {
+    private List<T> getAllEightNeighbours(T vertex) {
         List<T> neighbours = new java.util.ArrayList<>();
         int startPosX = (vertex.getX() - 1 < 0) ? vertex.getX() : vertex.getX() - 1;
         int startPosY = (vertex.getY() - 1 < 0) ? vertex.getY() : vertex.getY() - 1;
