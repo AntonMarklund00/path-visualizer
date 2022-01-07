@@ -4,7 +4,7 @@ public abstract class Cell {
 
     private int x;
     private int y;
-    protected int distanceFromStart;
+    protected double distanceFromStart;
     protected double heuristicDistance;
     protected Cell parent;
     protected boolean isVisited;
@@ -23,7 +23,7 @@ public abstract class Cell {
         return this.y;
     }
 
-    public int getDistanceFromStart() {
+    public double getDistanceFromStart() {
         return this.distanceFromStart;
     }
 
@@ -43,7 +43,7 @@ public abstract class Cell {
         return isWall;
     }
 
-    public void setDistanceFromStart(int distanceFromStart) {
+    public void setDistanceFromStart(double distanceFromStart) {
         this.distanceFromStart = distanceFromStart;
     }
 
