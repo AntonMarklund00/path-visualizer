@@ -22,7 +22,7 @@ public class DjikstraService <T extends Cell>{
 
     public Map<Integer, List<Integer[]>> findClosestPath(Integer[][] matrix, int startY, int startX, int endY, int endX) {
         vertexMatrix = getVertexMatrix(matrix);
-        priorityQueue = new MinHeap<T>(vertexMatrix.length * vertexMatrix[0].length);
+        priorityQueue = new MinHeap<>(vertexMatrix.length * vertexMatrix[0].length);
         cellsVisited = new ArrayList<>();
 
         start = vertexMatrix[startY][startX];
@@ -145,7 +145,7 @@ public class DjikstraService <T extends Cell>{
         }
         return neighbours;
     }
-    private Supplier<Double> getAdditionalValueFromStart = () -> 1.0;
 
+    private final Supplier<Double> getAdditionalValueFromStart = () -> 1.0;
     private final Supplier<Integer> getListXSize = () -> vertexMatrix[0].length;
 }
