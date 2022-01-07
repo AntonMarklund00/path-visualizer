@@ -10,7 +10,7 @@ public abstract class Cell {
     protected boolean isVisited;
     protected boolean isWall;
 
-    public Cell(int x, int y) {
+    public Cell(int y, int x) {
         this.x = x;
         this.y = y;
     }
