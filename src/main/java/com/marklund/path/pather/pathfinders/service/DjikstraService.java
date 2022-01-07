@@ -66,7 +66,7 @@ public class DjikstraService <T extends Cell>{
             current.setVisited(true);
             List<T> neighbours = getAllFourNeighbours(current);
             for (T neighbour : neighbours) {
-                int costFromStart = current.getDistanceFromStart() + 1;
+                double costFromStart = current.getDistanceFromStart() + getAdditionalValueFromStart.get();
                 double heuristicDistance = getDistance(neighbour, goal);
                 if( neighbour != null && !neighbour.isWall() && (!neighbour.isVisited() || costFromStart < neighbour.getDistanceFromStart())) {
                     neighbour.setDistanceFromStart(costFromStart);
@@ -145,5 +145,7 @@ public class DjikstraService <T extends Cell>{
         }
         return neighbours;
     }
+    private Supplier<Double> getAdditionalValueFromStart = () -> 1.0;
+
     private final Supplier<Integer> getListXSize = () -> vertexMatrix[0].length;
 }
