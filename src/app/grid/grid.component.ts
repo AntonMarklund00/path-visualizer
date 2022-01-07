@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -102,7 +102,7 @@ export class GridComponent implements OnInit {
     this.buttonDisabled = true;
     await this.getAStarSolutionFromApi();
     await this.drawVisitedSolution();
-    this.drawSolution();
+    await this.drawSolution();
     this.buttonDisabled = false;
   }
 
@@ -110,43 +110,45 @@ export class GridComponent implements OnInit {
     this.buttonDisabled = true;
     await this.getDjikstrasSolutionFromApi()
     await this.drawVisitedSolution();
-    this.drawSolution();
+    await this.drawSolution();
     this.buttonDisabled = false;
   }
 
   async getAStarSolutionFromApi(){
     // @ts-ignore
-    const data = await this.http.get('/api/astar',
-        {params: {
-          'grid': this.grid,
+    this.solution = await this.http.get('/api/astar',
+        {
+          params: {
+            'grid': this.grid,
             'starty': this.startPositionY,
             'startx': this.startPositionX,
             'endy': this.endPositionY,
-            'endx': this.endPositionX}})
-        .toPromise()
-
-    this.solution = data;
+            'endx': this.endPositionX
+          }
+        })
+        .toPromise();
   }
 
   async getDjikstrasSolutionFromApi(){
     // @ts-ignore
-    const data = await this.http.get('/api/djikstra',
-        {params: {
-          'grid': this.grid,
+    this.solution = await this.http.get('/api/djikstra',
+        {
+          params: {
+            'grid': this.grid,
             'starty': this.startPositionY,
             'startx': this.startPositionX,
             'endy': this.endPositionY,
-            'endx': this.endPositionX}})
-        .toPromise()
-
-    this.solution = data;
+            'endx': this.endPositionX
+          }
+        })
+        .toPromise();
   }
 
   async drawVisitedSolution(){
     let visited = this.solution[0];
 
     for (let i = 0; i < visited.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 15));
+      await new Promise(resolve => setTimeout(resolve, 10));
       this.grid[visited[i][0]][visited[i][1]] = 4;
     }
   }
