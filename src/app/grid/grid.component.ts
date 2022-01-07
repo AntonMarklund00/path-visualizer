@@ -69,12 +69,12 @@ export class GridComponent implements OnInit {
       this.mouseDown = true
     }
 
-    if (this.grid[y][x] == 2) {
+    if (this.grid[y][x] == 2 && !this.moveEnd) {
       this.grid[y][x] = 0;
       this.moveStart = true;
     }
 
-    if (this.grid[y][x] == 3) {
+    if (this.grid[y][x] == 3 && !this.moveStart) {
       this.grid[y][x] = 0;
       this.moveEnd = true;
     }
@@ -124,7 +124,6 @@ export class GridComponent implements OnInit {
             'endy': this.endPositionY,
             'endx': this.endPositionX}})
         .toPromise()
-    console.log(data)
 
     this.solution = data;
   }
@@ -177,14 +176,18 @@ export class GridComponent implements OnInit {
   clearVisitedPaths(){
     let visited = this.solution[0];
     for (let i = 0; i < visited.length; i++) {
-      this.grid[visited[i][0]][visited[i][1]] = 0;
+      if (this.grid[visited[i][0]][visited[i][1]] != 1){
+        this.grid[visited[i][0]][visited[i][1]] = 0;
+      }
     }
   }
 
   clearSolutionPath(){
     let solution = this.solution[1];
     for (let i = 0; i < solution.length; i++) {
-      this.grid[solution[i][0]][solution[i][1]] = 0;
+      if(this.grid[solution[i][0]][solution[i][1]] != 1){
+        this.grid[solution[i][0]][solution[i][1]] = 0;
+      }
     }
   }
 
