@@ -13,29 +13,43 @@
 * { box-sizing: border-box; }
 table { margin: 10px; }
 td {
-    border: 1px solid lightgray;
+    border: 1px solid #afd8f8;
+    height: 40px;
+    max-height: 40px;
+    width: 40px;
+    max-width: 40px;
+}
+
+.active {
+    background-color: #0c3547;
     height: 40px;
     width: 40px;
 }
 
-.active {
-    background-color: #383a4d;
-}
-
 .start{
-    background-color: #197fe6;
+    background-image: url("../assets/arrow.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 .goal{
-    background-color: #C91C4C;
+    background-image: url("../assets/target.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 .path{
-    background-color: #8ce65c;
+    background-color: #FFFE6A;
+    height: 40px;
+    width: 40px;
 }
 
 .visited{
-    background-color: #89ab8c;
+    background-color: #00BDEABF;
+    height: 40px;
+    width: 40px;
 }
 
 .cell {
@@ -43,7 +57,8 @@ td {
     border: 0;
     height: 40px;
     width: 40px;
-    text-align: center;
+    max-height: 40px;
+    max-width: 40px;
 }
 
 .solve{
@@ -53,47 +68,6 @@ td {
 
 }
 
-/*button*/
-.button {
-    background-color: #3ee31e;
-    border: 1px solid #3ee31e;
-    border-radius: 5px;
-    color: #f3fdf1;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 5px;
-    width: 250px;
-    height: 40px;
-    margin: 10px;
-}
-.button:hover{
-    background-color: #2b9f14;
-    color: #f3fdf1;
-}
-
-.clear{
-    background-color: #36486b;
-    border: 1px solid #36486b;
-    color: #f1f3f8;
-}
-
-.clear:hover{
-    background-color: #4e679b;
-    color: #f1f3f8;
-}
-
-.buttonGroup{
-    display: inline-block;
-    margin: 10px;
-}
-
-.preset{
-    background-color: #263238;
-    border: 1px solid #263238;
-    color: #aaa;
-}
-
-.preset:hover{
-    background-color: #344954;
-    color: #aaa;
+i{
+    position: relative;
 }
