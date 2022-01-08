@@ -6,14 +6,14 @@
             </div>
         </td>
     </tr>
-    <div class="buttonGroup">
-        <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithAStar()">Solve With A*</button>
-        <button class="button clear" [disabled]="buttonDisabled" (click)="cleanGrid()">Clear Board</button>
-        <button class="button clear" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Path</button>
-        <button class="button" [disabled]="buttonDisabled" (click)="solveGridWithDjikstras()">Solve With Djikstra</button>
-    </div>
-    <div class="buttonGroup">
-        <app-presets (presetEmit)="grid = $event" (startAndEnd)="setStartAndEnd($event)"></app-presets>
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <button class="btn btn-success col-md-4 mx-1 my-1" [disabled]="buttonDisabled" (click)="solveGridWithAStar()">Solve With A*</button>
+            <button class="btn btn-primary col-md-4 mx-1 my-1" [disabled]="buttonDisabled" (click)="cleanGrid()">Clear Board</button>
+            <button class="btn btn-success col-md-4 mx-1 my-1" [disabled]="buttonDisabled" (click)="solveGridWithDjikstras()">Solve With Djikstra</button>
+            <button class="btn btn-primary col-md-4 mx-1 my-1" [disabled]="buttonDisabled" (click)="clearSolution()">Clear Path</button>
+            <app-presets (presetEmit)="grid = $event" (startAndEnd)="setStartAndEnd($event)"></app-presets>
+        </div>
     </div>
 </div>
 
